@@ -27,7 +27,7 @@ This project is a simple storefront built with Angular, showcasing various Angul
 Before you begin, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/)
-- Angular CLI: `npm install -g @angular/cli`
+- Angular CLI: `npm install -g @angular/cli@16`
 - [Prime NG](https://primeng.org/)
 
 ### Installation
