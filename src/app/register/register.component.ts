@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { registerDto } from '../dtos/register.dto';
@@ -46,7 +45,7 @@ export class RegisterComponent {
                     `dateOfBirth: ${this.dateOfBirth}` +
                     `isAccepted: ${this.isAccepted}`;
     // alert(message);
-    const apiUrl = "http://localhost:6969/api/v1/users/register";
+    
     const registerDto: registerDto = {
       "fullname": this.fullName,
       "phone_number": this.phone,
