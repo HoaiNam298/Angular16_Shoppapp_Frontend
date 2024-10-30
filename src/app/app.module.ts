@@ -14,6 +14,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http'
     RouterOutlet,
     HttpClientModule
   ],
-  providers: [],
-  bootstrap: [RegisterComponent,
-    HeaderComponent,
-    FooterComponent]
+  providers: [UserService],
+  bootstrap: [
+    LoginComponent,
+    // RegisterComponent
+  ]
 })
 export class AppModule { }

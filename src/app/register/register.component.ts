@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { response } from 'express';
-import { registerDto } from '../dtos/register.dto';
+import { registerDto } from '../dtos/user/register.dto';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService } from '../service/user.service';
 })
 export class RegisterComponent {
   @ViewChild('registerForm') registerForm!: NgForm;
-  phone: string;
+  phoneNumber: string;
   password: string;
   retypePassword: string;
   fullName: string;
@@ -21,7 +21,7 @@ export class RegisterComponent {
   isAccepted: boolean;
 
   constructor(private userService: UserService, private router: Router){
-    this.phone='';
+    this.phoneNumber='';
     this.password='';
     this.retypePassword='';
     this.fullName='';
@@ -30,14 +30,12 @@ export class RegisterComponent {
     this.address='';
     this.isAccepted=false;
   }
-  onPhoneChange(){
-    console.log(`Phone typed: ${this.phone}`)
+  onPhoneNumberChange(){
+    console.log(`Phone typed: ${this.phoneNumber}`)
   }
-  onDateOfBirthChange(){
-
-  }
+  
   register(){
-    const message = `phone: ${this.phone}` +
+    const message = `phone: ${this.phoneNumber}` +
                     `password: ${this.password}` +
                     `retype password: ${this.retypePassword}` +
                     `fullName: ${this.fullName}` +
@@ -45,10 +43,11 @@ export class RegisterComponent {
                     `dateOfBirth: ${this.dateOfBirth}` +
                     `isAccepted: ${this.isAccepted}`;
     // alert(message);
+    debugger
     
     const registerDto: registerDto = {
       "fullname": this.fullName,
-      "phone_number": this.phone,
+      "phone_number": this.phoneNumber,
       "address": this.address,
       "password": this.password,
       "retype_password": this.retypePassword,
@@ -67,6 +66,7 @@ export class RegisterComponent {
       },
       complete() {
         debugger
+        // alert(`Đăng ký thành công: ${JSON.stringify(registerDto)}`)
       },
       error(error: any) {
         //Xử lý lỗi nếu có

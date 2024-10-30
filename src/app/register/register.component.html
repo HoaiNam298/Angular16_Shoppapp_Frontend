@@ -6,21 +6,21 @@
         <div class="register-form mx-auto">
           <h2 class="register-header">Đăng ký</h2>
           <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="phoneNumber">Phone Number</label>
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="phone"
+              [(ngModel)]="phoneNumber"
               required
-              (input)="onPhoneChange()"
-              name="phone"
+              (input)="onPhoneNumberChange()"
+              name="phoneNumber"
               (focus)="registerForm.form.markAsTouched()"
-              id="phone"
+              id="phoneNumber"
             />
             <div class="divider-nospace"></div>
             <p
               class="text-danger"
-              *ngIf="phone.length < 6 && registerForm.form.touched"
+              *ngIf="phoneNumber.length < 6 && registerForm.form.touched"
             >
               Phone phải có ít nhất 6 ký tự
             </p>

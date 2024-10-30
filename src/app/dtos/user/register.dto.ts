@@ -1,30 +1,30 @@
 import { IsString, IsNotEmpty, IsPhoneNumber, IsDate } from 'class-validator';
 
 export class registerDto {
-    @IsString()
-    fullname: string;
+  @IsString()
+  fullname: string;
 
-    @IsPhoneNumber()
-    @IsNotEmpty()
-    phone_number: string;
+  @IsPhoneNumber()
+  @IsNotEmpty()
+  phone_number: string;
 
-    @IsString()
-    address: string;
+  @IsString()
+  address: string;
 
-    @IsString()
-    @IsNotEmpty()
-    password: string;
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 
-    @IsString()
-    @IsNotEmpty()
-    retype_password: string;
+  @IsString()
+  @IsNotEmpty()
+  retype_password: string;
 
-    @IsDate()
-    date_of_birth: Date;
+  @IsDate()
+  date_of_birth: Date;
 
-    facebook_account_id: number = 0;
-    google_account_id: number = 0;
-    role_id: number = 1;
+  facebook_account_id: number = 0;
+  google_account_id: number = 0;
+  role_id: number = 1;
 
   constructor(data: any) {
     this.fullname = data.fullName;
