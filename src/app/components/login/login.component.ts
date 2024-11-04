@@ -76,11 +76,11 @@ export class LoginComponent {
       },
       complete() {
         debugger
-        // alert(`Đăng nhập thành công: ${JSON.stringify(registerDto)}`)
+        alert(`Đăng nhập thành công: ${JSON.stringify(loginDto)}`)
       },
       error(error: any) {
         //Xử lý lỗi nếu có
-        alert(`Cannot login, error: ${error.error}`);
+        alert(`Cannot login, error: ${error?.error?.message}`);
         debugger
         console.error('Đăng nhập không thành công: ', error);
       },
