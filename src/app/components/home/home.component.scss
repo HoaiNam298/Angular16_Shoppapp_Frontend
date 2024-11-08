@@ -57,9 +57,17 @@ select option {
 
 .product-image {
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1; /* Đảm bảo khung chứa có dạng hình vuông */
+  overflow: hidden;
   margin-bottom: 10px;
 }
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh bao phủ toàn bộ khu vực hình vuông */
+}
+
 
 .product-name {
   color: white;

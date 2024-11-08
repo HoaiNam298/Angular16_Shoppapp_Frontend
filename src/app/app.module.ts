@@ -44,7 +44,8 @@ import { TokenIntercepter } from './intercepters/token.intercepter';
     }
   ],
   bootstrap: [
-    LoginComponent,
+    HomeComponent,
+    // LoginComponent,
     // RegisterComponent
   ]
 })
