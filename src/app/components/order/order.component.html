@@ -4,23 +4,85 @@
         <h1>Đây là trang Order</h1>
         <p>Sử dụng bootstrap</p>
     </div>
+    <form [formGroup]="orderForm">
     <div class="row">
         <div class="col-md-6">
             <h2 class="product-header">Thông tin người nhận</h2>
-            <form>
+            <!-- <form> -->
                 <div class="mb-3">
-                  <label for="name" class="form-label">Họ và tên</label>
-                  <input type="text" class="form-control" id="name">
+                  <label for="fullname" class="form-label">Họ và tên</label>
+                  <input type="text" 
+                    class="form-control" id="fullname"
+                    formControlName="fullname"
+                    placeholder="Fullname"
+                    [class.is-invalid]="orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched">
+                    <div 
+                        *ngIf="orderForm.get('fullname')!.invalid && orderForm.get('fullname')!.touched"
+                        class="invalid-feedback">
+                        Họ tên là trường bắt buộc.
+                    </div>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email">
+                  <input type="text" 
+                    class="form-control" id="email"
+                    formControlName="email"
+                    placeholder="Email"
+                    [class.is-invalid]="orderForm.get('email')!.invalid && orderForm.get('email')!.touched">
+                    <div 
+                        *ngIf="orderForm.get('email')!.invalid && orderForm.get('email')!.touched"
+                        class="invalid-feedback">
+                        Email Không đúng định dạng.
+                    </div>
                 </div>
                 <div class="mb-3">
                   <label for="phone" class="form-label">Số điện thoại</label>
-                  <input type="text" class="form-control" id="phone">
+                  <input type="text"  
+                    class="form-control" id="phone"
+                    formControlName="phone_number"
+                    placeholder="Phone number"
+                    [class.is-invalid]="orderForm.get('phone_number')!.invalid && orderForm.get('phone_number')!.touched">
+                    <div 
+                        *ngIf="orderForm.get('phone_number')!.invalid && orderForm.get('phone_number')!.touched"
+                        class="invalid-feedback">
+                        Phone Number là trường bắt buộc.
+                    </div>
                 </div>
-            </form>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input type="text"  
+                      class="form-control" id="address"
+                      formControlName="address"
+                      placeholder="Address"
+                      [class.is-invalid]="orderForm.get('address')!.invalid && orderForm.get('address')!.touched">
+                      <div 
+                          *ngIf="orderForm.get('address')!.invalid && orderForm.get('address')!.touched"
+                          class="invalid-feedback">
+                          Address là trường bắt buộc.
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Ghi chú</label>
+                    <input type="text" 
+                      class="form-control" id="note"
+                      formControlName="note"
+                      placeholder="Note">
+                </div>
+                <div class="form-group">
+                    <label for="shippingMethod" class="form-label">Phương thức vận chuyển</label>
+                    <select id="shippingMethod" class="form-control" formControlName="shipping_method">
+                        <option value="express">Nhanh (Express)</option>
+                        <option value="normal">Thường (Normal)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod" class="form-label">Phương thức thanh toán</label>
+                    <select id="paymentMethod" class="form-control" formControlName="payment_method">
+                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="other">Thanh toán khác</option>
+                    </select>
+                </div>
+            <!-- </form> -->
         </div>
         <div class="col-md-6">
             <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
@@ -34,47 +96,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <div class="product-infor">
-                                <img src="https://images.pexels.com/photos/4158/apple-iphone-smartphone-desk.jpg?auto=compress&cs=tinysrgb&w=400" 
-                                alt="Product-Image" class="product-image">
-                                <span class="product-name">Tên sản phẩm</span>
-                            </div>
-                        </td>
-                        <td>2</td>
-                        <td>100,000 đ</td>
-                        <td>200,000 đ</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-infor">
-                                <img src="https://images.pexels.com/photos/4158/apple-iphone-smartphone-desk.jpg?auto=compress&cs=tinysrgb&w=400" 
-                                alt="Product-Image" class="product-image">
-                                <span class="product-name">Tên sản phẩm</span>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>150,000 đ</td>
-                        <td>150,000 đ</td>
-                    </tr>
+                    <ng-container *ngFor="let item of cartItems">
+                        <tr>
+                            <td>
+                                <div class="product-infor">
+                                    <img [src]="item.product.thumbnail" 
+                                    alt="Product-Image" class="product-image">
+                                    <span class="product-name">{{ item.product.name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price | currency: 'VND': 'symbol':'1.2-2' }}</td>
+                            <td>{{ (item.product.price * item.quantity) | currency: 'VND': 'symbol':'1.2-2' }}</td>
+                        </tr>
+                    </ng-container>
                 </tbody>
-            </table>
+            </table>  
             <div>
-                <h4 class="header-text text-end">Tổng giá: 350,000 đ</h4>
+                <h4 class="header-text text-end">Tổng giá: {{ totalAmount | currency: 'VND': 'symbol':'1.2-2' }}</h4>
             </div>
             <div class="mt-3">
                 <h4 class="product-header">Nhập coupon</h4>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nhập coupon">
-                    <button class="btn btn-gradient" type="button">Áp dụng</button>
+                    <input type="text" class="form-control"
+                        formControlName="couponcode" 
+                        placeholder="Nhập coupon">
+                    <button class="btn btn-gradient" 
+                        type="button"
+                        (click)="applyCoupon()">
+                        Áp dụng
+                    </button>
                 </div>
                 <div class="text-start mt-3">
-                    <button class="btn btn-gradient" type="button">Đặt hàng</button>
+                    <button class="btn btn-gradient" type="button" (click)="placeOrder()">Đặt hàng</button>
                 </div>
             </div>
         </div>
         
     </div>
+    </form>
 </div>
 <app-footer></app-footer>
