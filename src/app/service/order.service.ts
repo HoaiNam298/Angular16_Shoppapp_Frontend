@@ -17,4 +17,8 @@ export class OrderService {
   placeOrder(orderData: OrderDTO) {
     return this.http.post(this.apiUrl, orderData);
   }
+
+  getOrderById(id: number) {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
 }

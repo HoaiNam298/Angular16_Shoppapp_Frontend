@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { enviroment } from 'src/app/enviroments/enviroment';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService : ProductService,
-    private categoryService : CategoryService
+    private categoryService : CategoryService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -94,5 +96,10 @@ export class HomeComponent implements OnInit {
       startPage = Math.max(endPage - maxVisiblePages + 1, 1);
     }
     return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
+  }
+
+  onProductClick(productId: number) {
+    debugger
+    this.router.navigate(['/products', productId]);
   }
 }

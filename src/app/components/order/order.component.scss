@@ -40,10 +40,12 @@ th, td {
     padding: 10px;
     text-align: center;
 }
-.product-infor{
+.product-infor {
     display: flex;
-    align-items: center;
+    align-items: center; /* căn giữa dọc hình ảnh và tên sản phẩm */
+    gap: 10px; /* khoảng cách giữa hình ảnh và tên */
 }
+  
 .product-image{
     width: 100px;
     height: 100px;

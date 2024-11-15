@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { enviroment } from 'src/app/enviroments/enviroment';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from 'src/app/models/product.image';
@@ -19,6 +20,7 @@ export class DetailProductComponent implements OnInit{
   constructor(
     private productService: ProductService,
     private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -109,7 +111,7 @@ export class DetailProductComponent implements OnInit{
   }
 
   buyNow(): void{
-
+    this.router.navigate(['/orders'])
   }
 
 }
