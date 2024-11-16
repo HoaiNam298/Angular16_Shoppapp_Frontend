@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { enviroment } from 'src/app/enviroments/enviroment';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from 'src/app/models/product.image';
@@ -20,45 +20,45 @@ export class DetailProductComponent implements OnInit{
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private activatedRouter: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    //Lấy productId từ url
-    //const idParam = this.activatedRouter.paramMap.get('id');
-    debugger
-    // this.cartService.clearCart();
-    const idParam = 9; //fake tạm giá trị
-    if(idParam !== null) {
-      this.productId = +idParam;
-    }
-    if(!isNaN(this.productId)) {
-      this.productService.getDetailProduct(this.productId).subscribe({
-        next: (response: any) => {
-          //Lấy danh sách ảnh sản phẩm và thay đổi URL
-          debugger
-          if(response.product_images && response.product_images.length > 0) {
-            response.product_images.forEach((product_image: ProductImage) => {
-              debugger
-              product_image.imageUrl = `${enviroment.apiBaseUrl}/products/images/${product_image.imageUrl}`;
-            });
+    // Lấy productId từ URL
+    this.activatedRouter.paramMap.subscribe((paramMap) => {
+      const idParam = paramMap.get('id'); // Lấy tham số 'id'
+      if (idParam !== null) {
+        this.productId = +idParam;
+      }
+
+      // Nếu productId hợp lệ, gọi API lấy chi tiết sản phẩm
+      if (!isNaN(this.productId)) {
+        this.productService.getDetailProduct(this.productId).subscribe({
+          next: (response: any) => {
+            // Lấy danh sách ảnh sản phẩm và thay đổi URL
+            if (response.product_images && response.product_images.length > 0) {
+              response.product_images.forEach((product_image: ProductImage) => {
+                product_image.imageUrl = `${enviroment.apiBaseUrl}/products/images/${product_image.imageUrl}`;
+              });
+            }
+            this.product = response;
+
+            // Hiển thị ảnh đầu tiên
+            this.showImage(0);
+          },
+          complete: () => {
+            console.log('Product details loaded successfully.');
+          },
+          error: (error: any) => {
+            console.error('Error fetching detail:', error);
           }
-          debugger
-          this.product = response
-          //Bắt đầu với ảnh đầu tiên
-          this.showImage(0);
-        },
-        complete: () => {
-          debugger
-        },
-        error: (error: any) => {
-          debugger
-          console.log('Error fetching detail: ', error);
-        }
-      });
-    } else {
-      console.error('Invalid productId: ', idParam);
-    }
+        });
+      } else {
+        console.error('Invalid productId:', idParam);
+        this.router.navigate(['/not-found']);
+      }
+    });
   }
 
   showImage(index: number) {

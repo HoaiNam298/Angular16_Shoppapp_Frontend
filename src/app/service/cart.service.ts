@@ -38,7 +38,6 @@ export class CartService {
   //Lưu trữ giỏ hành vào localStorage
   saveCartToLocalStorage(): void {
     debugger
-    alert("Sucessfully")
     localStorage.setItem('cart', JSON.stringify(Array.from(this.cart.entries())));
   }
 

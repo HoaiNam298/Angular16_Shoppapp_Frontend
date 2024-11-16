@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { enviroment } from '../enviroments/enviroment';
 import { Product } from '../models/product';
 import { OrderDTO } from '../dtos/order.dto';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  placeOrder(orderData: OrderDTO) {
-    return this.http.post(this.apiUrl, orderData);
+  placeOrder(orderData: OrderDTO): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, orderData);
   }
 
   getOrderById(id: number) {

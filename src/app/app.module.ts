@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TokenIntercepter } from './intercepters/token.intercepter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AppComponent } from './app/app.component';
     // NgIf,
     // RouterOutlet,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbPopoverModule
   ],
   providers: [
     {

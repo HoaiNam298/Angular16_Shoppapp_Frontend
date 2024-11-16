@@ -6,14 +6,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'products/:id', component: DetailProductComponent },
-  { path: 'orders', component: OrderComponent },
-  { path: 'orders/:id', component: OrderDetailComponent },
+  { path: 'products/:id', component: DetailProductComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'orders/:id', component: OrderDetailComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

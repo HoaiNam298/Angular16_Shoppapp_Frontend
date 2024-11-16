@@ -28,7 +28,31 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/login">Đăng nhập</a>
+                        <ng-container *ngIf="userResponse">
+                            <a class="nav-link" 
+                                routerLink="/profile"
+                                [ngbPopover]="popoverContent"
+                                triggers="click"
+                                [placement]="'bottom'">
+                                {{ userResponse.fullname }}
+                            </a>
+                            <ng-template #popoverContent>
+                                <div class="popover-list">
+                                    <a href="#" class="popover-item" (click)="handleItemClick(0)">
+                                        Tài khoản của tôi
+                                    </a>
+                                    <a href="#" class="popover-item" (click)="handleItemClick(1)">
+                                        Đơn mua
+                                    </a>
+                                    <a href="#" class="popover-item" (click)="handleItemClick(2)">
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="!userResponse">
+                            <a class="nav-link" routerLink="/login">Đăng nhập</a>
+                        </ng-container>
                     </li>
                 </ul>
             </div>

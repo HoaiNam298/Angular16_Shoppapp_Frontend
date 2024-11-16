@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { enviroment } from 'src/app/enviroments/enviroment';
 import { OrderDetail } from 'src/app/models/order.detail';
 import { Product } from 'src/app/models/product';
@@ -37,7 +38,8 @@ export class OrderDetailComponent implements OnInit {
   couponcode: string = '';
 
   constructor(
-    private orderService: OrderService
+    private orderService: OrderService,
+    private activatedRouter: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -46,14 +48,20 @@ export class OrderDetailComponent implements OnInit {
 
   getOrderDetails(): void {
     debugger
-    const orderId = 5;
+    const id = this.activatedRouter.snapshot.paramMap.get('id');
+    // Chuyển đổi 'orderId' thành number
+    if (!id) {
+      console.error('Order ID is null or undefined');
+      return;
+    }
+    const orderId = +id;
     this.orderService.getOrderById(orderId).subscribe({
       next: (response: any) => {
         debugger;
         this.orderResponse.id = response.id;
         this.orderResponse.user_id = response.user_id;
         this.orderResponse.fullname = response.fullname;
-        this.orderResponse.email = response.fullname;
+        this.orderResponse.email = response.email;
         this.orderResponse.phone_number = response.phone_number;
         this.orderResponse.address = response.address;
         this.orderResponse.note = response.note;
