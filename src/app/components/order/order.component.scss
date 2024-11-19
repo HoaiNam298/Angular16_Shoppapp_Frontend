@@ -1,3 +1,5 @@
+@import '../../styles/shared-style.scss';
+
 .container {
     color: white;
 }
@@ -57,7 +59,7 @@ th, td {
     margin-right: 10px;
 }
 .btn-gradient{
-    background: linear-gradient(to right, rgb(225, 64, 180), rgb(126, 43, 237));
+    background: linear-gradient(to right, rgb(225, 64, 180), $btn-color);
     color: white;
     border-radius: 30px;
     width: 200px;

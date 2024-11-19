@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UserResponse } from 'src/app/responses/user/user.response';
 import { CartService } from 'src/app/service/cart.service';
@@ -14,11 +15,13 @@ export class HeaderComponent implements OnInit {
 
   userResponse?: UserResponse | null;
   isPopoverOpen = false;
+  activeNavItem: number = 0;
 
   constructor(
     private userService: UserService,
     private popoverConfig: NgbPopoverConfig,
     private tokenService: TokenService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,11 @@ export class HeaderComponent implements OnInit {
       this.userResponse = this.userService.getUserResponseFromLocalStorage();
     }
     this.isPopoverOpen = false;
+  }
+
+  setActiveNavItem(index: number) {
+    alert(index);
+    this.activeNavItem = index;
   }
 
 }

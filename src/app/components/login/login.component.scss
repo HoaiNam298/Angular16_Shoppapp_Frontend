@@ -1,3 +1,5 @@
+@import '../../styles/shared-style.scss';
+
 .container {
     color: white;
     height: 100vh;
@@ -82,7 +84,7 @@
     color: rgba(243, 165, 42, 0.4);
 }
 .login-button {
-    background: linear-gradient(to right, rgb(225, 64, 100), rgb(126, 43, 237));
+    background: linear-gradient(to right, rgb(225, 64, 100), $btn-color);
     color: white;
     border: 30px;
     width: 100%;

@@ -16,8 +16,15 @@ import { UserResponse } from 'src/app/responses/user/user.response';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm!: NgForm;
+  /* login user
   phoneNumber: string = '1122334455';
   password: string = '123';
+  */
+
+  // /* login admin
+  phoneNumber: string = '2233445566';
+  password: string = '123';
+  // */
 
   roles: Role[] = [];
   rememberMe: boolean = true;
@@ -74,19 +81,16 @@ export class LoginComponent implements OnInit {
           this.userService.getUserDetails(token).subscribe({
             next:(response: any) => {
               debugger;
-              // this.userResponse = {
-              //   id: response.id,
-              //   fullname: response.fullname,
-              //   phone_number: response.phone_number,
-              //   address: response.address,
-              //   is_active: response.is_active,
-              //   date_of_birth: response.date_of_birth,
-              //   facebook_account_id: response.facebook_account_id,
-              //   google_account_id: response.google_account_id,
-              //   role: response.role
-              // }
-              this.userService.saveUserResponseToLocalStorage(response);
-              this.router.navigate(['/']);
+              this.userResponse = {
+                ...response
+              }
+              this.userService.saveUserResponseToLocalStorage(this.userResponse);
+              if(this.userResponse?.role.name == 'admin') {
+                this.router.navigate(['/admin']);
+              } else if (this.userResponse?.role.name == 'user') {
+                this.router.navigate(['/']);
+              }
+              
             },
             complete: () => {
               debugger;

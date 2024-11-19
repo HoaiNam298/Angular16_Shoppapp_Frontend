@@ -60,10 +60,10 @@
                     <a href="#" class="page-link" (click)="onPageChange(page)">{{ page }}</a>
                 </li>
             </ng-container>
-            <li class="page-item" *ngIf="currentPage totalPages">
+            <li class="page-item" *ngIf="currentPage < totalPages">
                 <a href="#" class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
             </li>
-            <li class="page-item" *ngIf="currentPage totalPages">
+            <li class="page-item" *ngIf="currentPage < totalPages">
                 <a href="#" class="page-link" (click)="onPageChange(totalPages)">Last</a>
             </li>
         </ul>

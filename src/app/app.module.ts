@@ -19,6 +19,8 @@ import { TokenIntercepter } from './intercepters/token.intercepter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
     OrderComponent,
     OrderDetailComponent,
     RegisterComponent,
-    AppComponent
+    AppComponent,
+    AdminComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

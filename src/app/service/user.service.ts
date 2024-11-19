@@ -38,7 +38,7 @@ export class UserService {
     return this.http.post(this.apiUrlLogin, loginDto, this.apiConfig)
   }
 
-  getUserDetails(token: string) {
+  getUserDetails(token: string)  {
     return this.http.post(this.apiUserDetails, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

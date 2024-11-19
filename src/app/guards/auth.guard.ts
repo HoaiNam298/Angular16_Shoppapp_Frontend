@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { TokenService } from './token.service';
+import { TokenService } from '../service/token.service';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { elementAt } from 'rxjs';
 import { state } from '@angular/animations';
@@ -27,7 +27,10 @@ export class AuthGuard {
   }
 }
 
-export const AuthGuardFn: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const AuthGuardFn: CanActivateFn = (
+    next: ActivatedRouteSnapshot, 
+    state: RouterStateSnapshot
+  ): boolean => {
     debugger
     return inject(AuthGuard).canActivate(next, state);
 }

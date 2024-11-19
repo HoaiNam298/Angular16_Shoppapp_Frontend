@@ -6,15 +6,20 @@ import { RegisterComponent } from './components/register/register.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
-import { AuthGuard } from './service/auth.guard';
+import { AuthGuardFn } from './guards/auth.guard';
+import { AdminGuardFn } from './guards/admin.guard';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuardFn] },
   { path: 'register', component: RegisterComponent },
-  { path: 'products/:id', component: DetailProductComponent, canActivate: [AuthGuard] },
-  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
-  { path: 'orders/:id', component: OrderDetailComponent, canActivate: [AuthGuard] },
+  { path: 'products/:id', component: DetailProductComponent },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuardFn] },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardFn] },
+  { path: 'orders/:id', component: OrderDetailComponent, canActivate: [AuthGuardFn] },
 ];
 
 @NgModule({
