@@ -1,0 +1,16 @@
+/* Đảm bảo hình ảnh là hình vuông */
+.product-image {
+    width: 50px;        /* Đặt chiều rộng của ảnh */
+    height: 50px;       /* Đặt chiều cao của ảnh, bằng chiều rộng */
+    object-fit: cover;  /* Đảm bảo ảnh không bị méo, sẽ cắt ảnh sao cho vừa khung */
+    border-radius: 5px; /* Làm bo góc cho ảnh nếu muốn */
+    cursor: pointer;   /* Thêm hiệu ứng con trỏ khi di chuột vào ảnh */
+  }
+  
+  /* Đảm bảo ảnh nằm ở giữa */
+  td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  

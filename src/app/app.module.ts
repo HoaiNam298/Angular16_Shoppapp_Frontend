@@ -21,6 +21,9 @@ import { AppComponent } from './app/app.component';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { OrderAdminComponent } from './components/admin/order/order.admin.component';
+import { ProductComponent } from './components/admin/product/product.component';
+import { CategoryComponent } from './components/admin/category/category.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     RegisterComponent,
     AppComponent,
     AdminComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    OrderAdminComponent,
+    ProductComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

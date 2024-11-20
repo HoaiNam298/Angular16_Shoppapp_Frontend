@@ -22,6 +22,17 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiGetProducts, { params })
   }
 
+  getAllProducts(keyword: string,
+    page: number,
+    limit: number
+  ): Observable<Product[]> {
+    const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+    return this.http.get<any>(this.apiGetProducts, { params });
+  }
+
   getDetailProduct(productId: number) {
     return this.http.get(`${enviroment.apiBaseUrl}/products/${productId}`);
   }
