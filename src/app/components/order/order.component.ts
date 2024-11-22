@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrderDTO } from 'src/app/dtos/order.dto';
@@ -15,7 +15,7 @@ import { TokenService } from 'src/app/service/token.service';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
 
   orderForm: FormGroup; //đối tượng FormGroup để quản lý dữ liệu form
   cartItems: { product: Product, quantity: number } [] = [];

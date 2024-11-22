@@ -69,4 +69,9 @@ export class OrderAdminComponent implements OnInit {
     debugger
     this.router.navigate(['/products', productId]);
   }
+
+  viewDetails(order: OrderResponse) {
+    debugger
+    this.router.navigate(['/admin/orders', order.id])
+  }
 }

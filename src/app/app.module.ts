@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -22,8 +21,10 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { OrderAdminComponent } from './components/admin/order/order.admin.component';
-import { ProductComponent } from './components/admin/product/product.component';
-import { CategoryComponent } from './components/admin/category/category.component';
+import { ProductAdminComponent } from './components/admin/product/product.admin.component';
+import { CategoryAdminComponent } from './components/admin/category/category.admin.component';
+import { AdminModule } from './components/admin/admin.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -36,21 +37,23 @@ import { CategoryComponent } from './components/admin/category/category.componen
     OrderDetailComponent,
     RegisterComponent,
     AppComponent,
-    AdminComponent,
     UserProfileComponent,
-    OrderAdminComponent,
-    ProductComponent,
-    CategoryComponent
+    // AdminComponent,
+    // OrderAdminComponent,
+    // ProductAdminComponent,
+    // CategoryAdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     // NgIf,
     // RouterOutlet,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbPopoverModule
+    NgbPopoverModule,
+    AdminModule
   ],
   providers: [
     {

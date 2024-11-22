@@ -29,7 +29,14 @@
             <tbody>
                 <tr *ngFor="let order of orderResponses; let i = index">
                     <th scope="row">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</th>
-                    <td>{{ order.id }}</td>
+                    <td>
+                        <button 
+                            (click)="viewDetails(order)"
+                            class="ctn btn-primary">
+                            View Details
+                        </button>
+                        {{ order.id }}
+                    </td>
                     <td>{{ order.user_id }}</td>
                     <td>{{ order.fullname }}</td>
                     <td>{{ order.email }}</td>

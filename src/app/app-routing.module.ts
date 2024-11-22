@@ -23,7 +23,6 @@ const routes: Routes = [
 
   //Admin
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuardFn] },
-  { path: 'admin/orders', component: OrderAdminComponent, canActivate: [AdminGuardFn] },
 
 ];
 

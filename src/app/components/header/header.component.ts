@@ -35,7 +35,9 @@ export class HeaderComponent implements OnInit {
   }
 
   handleItemClick(index: number): void{
-    if(index === 2) {
+    if(index === 0) {
+      this.router.navigate(['/profile']);
+    }else if (index === 2) {
       this.userService.removeUserFromLocalStorage();
       this.tokenService.removeToken();
       this.userResponse = this.userService.getUserResponseFromLocalStorage();
@@ -44,7 +46,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setActiveNavItem(index: number) {
-    alert(index);
+    // alert(index);
     this.activeNavItem = index;
   }
 

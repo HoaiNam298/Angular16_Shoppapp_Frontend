@@ -16,7 +16,7 @@ export class ProductService {
   getProducts(keyword: string, categoryId: number, page: number, limit: number): Observable<Product[]> {
     const params = new HttpParams()
         .set('keyword', keyword.toString())
-        .set('categoryId', categoryId.toString())
+        .set('category_id', categoryId.toString())
         .set('page', page.toString())
         .set('limit', limit.toString());
     return this.http.get<Product[]>(this.apiGetProducts, { params })

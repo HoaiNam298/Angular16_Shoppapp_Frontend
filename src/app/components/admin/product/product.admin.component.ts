@@ -6,10 +6,10 @@ import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-product-admin',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  templateUrl: './product.admin.component.html',
+  styleUrls: ['./product.admin.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductAdminComponent implements OnInit {
 
   products: Product[] = [];
   itemsPerPage: number = 12;

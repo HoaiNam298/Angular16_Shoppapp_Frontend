@@ -1,0 +1,35 @@
+@import '../../styles/shared-style.scss';
+
+.container {
+    color: white;
+}
+.intro-selection{
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.form-control{
+    background-color: rgb(19, 23, 42);
+    border: 1px solid rgb(29, 33, 54);
+    color: white;
+}
+.form-control:focus{
+    border-color: white;
+    background-color: rgb(19, 23, 42);
+}
+.form-label{
+    color: white;
+}
+.user-header{
+    color: rgb(233, 66, 176);
+}
+.user-profile{
+    color: rgb(105, 244, 181);
+}
+.btn-gradient{
+    background: linear-gradient(to right, rgb(225, 64, 180), $btn-color);
+    color: white;
+    border-radius: 30px;
+    width: 200px;
+}

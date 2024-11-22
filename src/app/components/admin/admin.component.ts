@@ -23,9 +23,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
-    this.route.queryParams.subscribe(params => {
-      this.adminComponent = params['component'] || 'orders'; // 'orders' là mặc định nếu không có tham số
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.adminComponent = params['component'] || 'orders'; // 'orders' là mặc định nếu không có tham số
+    // });
   }
 
   logout() {
@@ -35,11 +35,19 @@ export class AdminComponent implements OnInit {
   }
 
   showAdminComponent(componentName: string): void {
-    this.adminComponent = componentName;
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { component: componentName },
-      queryParamsHandling: 'merge', // Giữ lại các query params khác (nếu có)
-    });
+    // this.adminComponent = componentName;
+    // this.router.navigate([], {
+    //   relativeTo: this.route,
+    //   queryParams: { component: componentName },
+    //   queryParamsHandling: 'merge', // Giữ lại các query params khác (nếu có)
+    // });
+
+    if(componentName == 'orders') {
+      this.router.navigate(['/admin/orders'])
+    } else if(componentName == 'categories') {
+      this.router.navigate(['/admin/categories'])
+    } else if(componentName == 'products') {
+      this.router.navigate(['/admin/products'])
+    }
   }
 }

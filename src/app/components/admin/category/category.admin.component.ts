@@ -5,10 +5,10 @@ import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
   selector: 'app-category-admin',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  templateUrl: './category.admin.component.html',
+  styleUrls: ['./category.admin.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryAdminComponent implements OnInit {
 
   categories: Category[] = [];
   itemsPerPage: number = 12;
