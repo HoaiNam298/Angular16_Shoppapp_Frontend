@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrderDTO } from 'src/app/dtos/order.dto';
 import { enviroment } from 'src/app/enviroments/enviroment';
 import { OrderDetail } from 'src/app/models/order.detail';
-import { Product } from 'src/app/models/product';
 import { OrderResponse } from 'src/app/responses/order.response';
-import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
-import { ProductService } from 'src/app/service/product.service';
 
 @Component({
-  selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss']
+  selector: 'app-detail-order',
+  templateUrl: './detail-order.admin.component.html',
+  styleUrls: ['./detail-order.admin.component.scss']
 })
-export class OrderDetailComponent implements OnInit {
+export class DetailOrderAdminComponent implements OnInit{
 
   orderResponse: OrderResponse = {
     id: 0,
@@ -33,13 +31,10 @@ export class OrderDetailComponent implements OnInit {
     order_details: []
   }
 
-  cartItems: { product: Product, quantity: number } [] = [];
-  totalAmount: number = 0;
-  couponcode: string = '';
-
   constructor(
+    private route: ActivatedRoute,
     private orderService: OrderService,
-    private activatedRouter: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,14 +42,8 @@ export class OrderDetailComponent implements OnInit {
   }
 
   getOrderDetails(): void {
-    debugger
-    const id = this.activatedRouter.snapshot.paramMap.get('id');
-    // Chuyển đổi 'orderId' thành number
-    if (!id) {
-      console.error('Order ID is null or undefined');
-      return;
-    }
-    const orderId = +id;
+    debugger;
+    const orderId = Number(this.route.snapshot.paramMap.get('id'));
     this.orderService.getOrderById(orderId).subscribe({
       next: (response: any) => {
         this.orderResponse = {
@@ -82,8 +71,23 @@ export class OrderDetailComponent implements OnInit {
     })
   }
 
-  applyCoupon(): void {
-
+  saveOrder() {
+    debugger;
+    const orderId = Number(this.route.snapshot.paramMap.get('id'));
+    this.orderService.updateOrder(orderId, new OrderDTO(this.orderResponse)).subscribe({
+      next: (response: any) => {
+        debugger;
+        console.log('Order updated successfully: ', response);
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
+      complete: () => {
+        debugger;
+      },
+      error: (error: any) => {
+        debugger;
+        console.error("Error fetching detail: ", error);
+      }
+    })
   }
 
 }

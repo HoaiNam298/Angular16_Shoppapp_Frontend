@@ -12,7 +12,7 @@
                         [ngClass]="{'active': i === currentImageIndex}"
                         class="carousel-item">
                         <div class="square-image">
-                            <img [src]="image.imageUrl"
+                            <img [src]="image.image_url"
                                 alt="Product Image" class="product-image">
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         class="thumbnail-item"
                         [ngClass]="{'active': i=== currentImageIndex}"
                         (click)=" thumbnailClick(i)">
-                        <img [src]="image.imageUrl"
+                        <img [src]="image.image_url"
                             alt="Thumbnail Image" class="thumbnail-image">
                     </div>
                 </div>

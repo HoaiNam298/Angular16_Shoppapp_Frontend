@@ -18,6 +18,7 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   placeOrder(orderData: OrderDTO): Observable<any> {
+    // Gửi yêu cầu đặt hàng
     return this.http.post<Order>(this.apiUrl, orderData);
   }
 
@@ -34,5 +35,13 @@ export class OrderService {
     .set('page', page.toString())
     .set('limit', limit.toString());
     return this.http.get<any>(this.apiGetAllOrders, { params });
+  }
+
+  updateOrder(orderId: number, orderData: OrderDTO): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${orderId}`, orderData);
+  }
+
+  deleteOrder(orderId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${orderId}`, { responseType: 'text' });
   }
 }

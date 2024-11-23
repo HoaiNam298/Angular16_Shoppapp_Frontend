@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "start:dev": "ng server --port 4300",
+    "build:dev": "ng build --port 4300",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

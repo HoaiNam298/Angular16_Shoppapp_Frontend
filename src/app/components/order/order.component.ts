@@ -27,6 +27,8 @@ export class OrderComponent implements OnInit {
     email: '',
     phone_number: '',
     address: '',
+    order_date: new Date,
+    status: '',
     note: '',
     total_money: 0,
     payment_method: 'cod',

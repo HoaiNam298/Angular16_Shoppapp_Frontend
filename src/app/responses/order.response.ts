@@ -12,7 +12,7 @@ export interface OrderResponse {
     status: string,
     total_money: number,
     shipping_method: string,
-    shipping_address: string,
+    shipping_address: Date,
     shipping_date: Date,
     payment_method: string,
     order_details: OrderDetail[]

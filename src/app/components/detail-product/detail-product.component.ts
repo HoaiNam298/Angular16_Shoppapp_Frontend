@@ -39,7 +39,7 @@ export class DetailProductComponent implements OnInit{
             // Lấy danh sách ảnh sản phẩm và thay đổi URL
             if (response.product_images && response.product_images.length > 0) {
               response.product_images.forEach((product_image: ProductImage) => {
-                product_image.imageUrl = `${enviroment.apiBaseUrl}/products/images/${product_image.imageUrl}`;
+                product_image.image_url = `${enviroment.apiBaseUrl}/products/images/${product_image.image_url}`;
               });
             }
             this.product = response;

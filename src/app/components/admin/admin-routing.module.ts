@@ -5,7 +5,7 @@ import { AdminGuard } from 'src/app/guards/admin.guard';
 import { OrderAdminComponent } from './order/order.admin.component';
 import { ProductAdminComponent } from './product/product.admin.component';
 import { CategoryAdminComponent } from './category/category.admin.component';
-import { DetailOrderAdminComponent } from './detail-order/detail-order.component';
+import { DetailOrderAdminComponent } from './detail-order/detail-order.admin.component';
 
 const routes: Routes = [
   { path: 'admin', 

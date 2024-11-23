@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
           product.url = `${enviroment.apiBaseUrl}/products/images/${product.thumbnail}`;
         });
         this.products = response.products;
-        this.totalPages = response.totalPages;
+        this.totalPages = response.total_pages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
       complete: () => {

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailOrderComponent } from './detail-order.component';
+import { DetailOrderAdminComponent } from './detail-order.admin.component';
 
 describe('DetailOrderComponent', () => {
-  let component: DetailOrderComponent;
-  let fixture: ComponentFixture<DetailOrderComponent>;
+  let component: DetailOrderAdminComponent;
+  let fixture: ComponentFixture<DetailOrderAdminComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DetailOrderComponent]
+      declarations: [DetailOrderAdminComponent]
     });
-    fixture = TestBed.createComponent(DetailOrderComponent);
+    fixture = TestBed.createComponent(DetailOrderAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

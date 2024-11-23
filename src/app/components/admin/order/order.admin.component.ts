@@ -33,7 +33,7 @@ export class OrderAdminComponent implements OnInit {
       next: (response: any) => {
         debugger
         this.orderResponses = response.orders;
-        this.totalPages = response.totalPages;
+        this.totalPages = response.total_pages;
         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
       complete: () => {
@@ -53,6 +53,7 @@ export class OrderAdminComponent implements OnInit {
   }
 
   generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
+    debugger;
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages / 2);
 
@@ -73,5 +74,27 @@ export class OrderAdminComponent implements OnInit {
   viewDetails(order: OrderResponse) {
     debugger
     this.router.navigate(['/admin/orders', order.id])
+  }
+
+  deleteOrder(id: number) {
+    const confirmation = window
+      .confirm('Are you sure you want to delete this order?');
+    if(confirmation) {
+      debugger;
+      this.orderService.deleteOrder(id).subscribe({
+        next: (response: any) => {
+          debugger;
+          // location.reload();
+          this.router.navigate(['/admin/orders'])
+        },
+        complete: () => {
+          debugger;
+        },
+        error: (error: any) => {
+          debugger;
+          console.error("Error fetching detail: ", error);
+        }
+      })
+    }
   }
 }
