@@ -8,6 +8,7 @@ import { TokenService } from 'src/app/service/token.service';
 import { RoleService } from 'src/app/service/role.service';
 import { Role } from 'src/app/models/role';
 import { UserResponse } from 'src/app/responses/user/user.response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -90,27 +91,40 @@ export class LoginComponent implements OnInit {
               } else if (this.userResponse?.role.name == 'user') {
                 this.router.navigate(['/']);
               }
+              Swal.fire({
+                title: 'Đăng nhập thành công!',
+                text: 'Chào mừng bạn trở lại!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+              });
               
             },
             complete: () => {
               debugger;
             },
             error: (error: any) => {
-              debugger;
-              alert(error?.error?.message)
-            }
+              console.error('Lỗi khi lấy thông tin người dùng: ', error);
+              Swal.fire({
+                title: 'Đăng nhập thất bại!',
+                text: error?.error?.message || 'Không thể lấy thông tin người dùng.',
+                icon: 'error',
+                confirmButtonText: 'Thử lại',
+              });
+            },
           })
         }
       },
       complete() {
         debugger
-        alert(`Đăng nhập thành công: ${JSON.stringify(loginDto)}`)
       },
-      error(error: any) {
-        //Xử lý lỗi nếu có
-        alert(`Cannot login, error: ${error?.error?.message}`);
-        debugger
-        console.error('Đăng nhập không thành công: ', error);
+      error: (error: any) => {
+        // Xử lý lỗi đăng nhập
+        Swal.fire({
+          title: 'Đăng nhập thất bại!',
+          text: error?.error?.message || 'Thông tin đăng nhập không chính xác.',
+          icon: 'error',
+          confirmButtonText: 'Thử lại',
+        });
       },
     });
   }

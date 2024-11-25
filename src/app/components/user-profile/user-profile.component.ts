@@ -5,6 +5,7 @@ import { UpdateUserDTO } from 'src/app/dtos/user/update.user.dto';
 import { UserResponse } from 'src/app/responses/user/user.response';
 import { TokenService } from 'src/app/service/token.service';
 import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -76,8 +77,9 @@ export class UserProfileComponent implements OnInit{
   }
 
   save(): void {
-    debugger
-    if(this.userProfileForm.valid) {
+    debugger;
+  
+    if (this.userProfileForm.valid) {
       const updateUserDTO: UpdateUserDTO = {
         fullname: this.userProfileForm.get('fullname')?.value,
         address: this.userProfileForm.get('address')?.value,
@@ -85,26 +87,48 @@ export class UserProfileComponent implements OnInit{
         retype_password: this.userProfileForm.get('retype_password')?.value,
         date_of_birth: this.userProfileForm.get('date_of_birth')?.value,
       };
-
+  
       debugger;
       let token = this.tokenService.getToken() ?? '';
-      this.userService.updateUserDetail(token, updateUserDTO)
-        .subscribe({
-          next: (response: any) => {
-            debugger;
+      this.userService.updateUserDetail(token, updateUserDTO).subscribe({
+        next: (response: any) => {
+          debugger;
+  
+          // Hiển thị thông báo thành công
+          Swal.fire({
+            title: 'Cập nhật thành công!',
+            text: 'Thông tin tài khoản của bạn đã được cập nhật. Vui lòng đăng nhập lại.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            // Xóa thông tin người dùng và token, sau đó điều hướng
             this.userService.removeUserFromLocalStorage();
             this.tokenService.removeToken();
             this.router.navigate(['/login']);
-          },
-          error: (error: any) => {
-            alert(error?.error?.message);
-          }
-        })
+          });
+        },
+        error: (error: any) => {
+          // Hiển thị thông báo lỗi
+          Swal.fire({
+            title: 'Cập nhật thất bại!',
+            text: error?.error?.message || 'Đã xảy ra lỗi trong quá trình cập nhật.',
+            icon: 'error',
+            confirmButtonText: 'Thử lại',
+          });
+        },
+      });
     } else {
-      if(this.userProfileForm.hasError('pasworMismatch')) {
-        alert('Mật khẩu và mật khẩu gõ lại chưa chính xác')
+      if (this.userProfileForm.hasError('pasworMismatch')) {
+        // Hiển thị thông báo lỗi mật khẩu không khớp
+        Swal.fire({
+          title: 'Lỗi!',
+          text: 'Mật khẩu và mật khẩu nhập lại không khớp. Vui lòng kiểm tra lại.',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+        });
       }
     }
   }
+  
 
 }

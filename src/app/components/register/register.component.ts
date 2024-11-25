@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { registerDto } from 'src/app/dtos/user/register.dto';
 import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -62,15 +63,26 @@ export class RegisterComponent {
         debugger
         //Xử lý kết quả khi trả về đăng ký thành công
         //Đăng ký thành công, chuyển sang màn hình login
+        Swal.fire({
+          title: 'Đăng nhập thành công!',
+          text: 'Chào mừng bạn trở lại!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
         this.router.navigate(['/login']);
       },
       complete() {
         debugger
-        // alert(`Đăng ký thành công: ${JSON.stringify(registerDto)}`)
       },
       error(error: any) {
         //Xử lý lỗi nếu có
-        alert(`Cannot register, error: ${error.error}`);
+        debugger
+        Swal.fire({
+          title: 'Đăng nhập thất bại!',
+          text: error?.error || 'Đăng ký không thành công',
+          icon: 'error',
+          confirmButtonText: 'Thử lại',
+        });
         debugger
         console.error('Đăng ký không thành công: ', error);
       },

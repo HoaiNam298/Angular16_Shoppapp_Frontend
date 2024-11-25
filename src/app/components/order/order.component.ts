@@ -9,6 +9,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
 import { ProductService } from 'src/app/service/product.service';
 import { TokenService } from 'src/app/service/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order',
@@ -100,26 +101,36 @@ export class OrderComponent implements OnInit {
   }
 
   placeOrder() {
-    debugger
-    if(this.orderForm.valid) {
-      //Sử dụng toán tử spread (...) để sao chép giá trị từ form vào orderData
+    debugger;
+  
+    if (this.orderForm.valid) {
+      // Sử dụng toán tử spread (...) để sao chép giá trị từ form vào orderData
       this.orderData = {
         ...this.orderData,
-        ...this.orderForm.value
+        ...this.orderForm.value,
       };
-      this.orderData.cart_items = this.cartItems.map(cartItem => ({
+      this.orderData.cart_items = this.cartItems.map((cartItem) => ({
         product_id: cartItem.product.id,
-        quantity: cartItem.quantity
+        quantity: cartItem.quantity,
       }));
       this.orderData.total_money = this.totalAmount;
-
-      //Dữ liệu hợp lệ, bạn có thể gửi đơn hàng đi
+  
+      // Dữ liệu hợp lệ, gửi đơn hàng đi
       this.orderService.placeOrder(this.orderData).subscribe({
         next: (response: Order) => {
           debugger;
-          alert("Đặt hàng thành công");
-          this.cartService.clearCart();
-          this.router.navigate(['/']);
+  
+          // Hiển thị thông báo thành công
+          Swal.fire({
+            title: 'Đặt hàng thành công!',
+            text: 'Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ sớm nhất!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            // Xóa giỏ hàng và điều hướng sau khi người dùng nhấn OK
+            this.cartService.clearCart();
+            this.router.navigate(['/']);
+          });
         },
         complete: () => {
           debugger;
@@ -127,21 +138,34 @@ export class OrderComponent implements OnInit {
         },
         error: (error: any) => {
           debugger;
-          alert(`Lỗi khi đặt hàng: ${error}`);
-        }
+  
+          // Hiển thị thông báo lỗi
+          Swal.fire({
+            title: 'Lỗi khi đặt hàng!',
+            text: `Đã xảy ra lỗi trong quá trình đặt hàng: ${error?.error?.message || 'Vui lòng thử lại sau.'}`,
+            icon: 'error',
+            confirmButtonText: 'Thử lại',
+          });
+        },
       });
-
     } else {
-      //Hiển thị thông báo lỗi hoặc xử lý khác
-      alert("Dữ liệu không hợp lệ. Vui lòng kiểm tra lại!");
+      // Hiển thị thông báo dữ liệu không hợp lệ
+      Swal.fire({
+        title: 'Dữ liệu không hợp lệ!',
+        text: 'Vui lòng kiểm tra lại thông tin đơn hàng trước khi đặt.',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+      });
     }
   }
-
+  
   calculateTotal(): void {
     this.totalAmount = this.cartItems.reduce(
-      (total, item) => total + item.product.price + item.quantity, 0
-    )
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   }
+  
 
   applyCoupon(): void {
 

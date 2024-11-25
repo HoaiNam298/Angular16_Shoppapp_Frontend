@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private popoverConfig: NgbPopoverConfig,
     private tokenService: TokenService,
     private router: Router,
   ) {}

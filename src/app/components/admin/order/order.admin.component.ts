@@ -4,6 +4,7 @@ import { enviroment } from 'src/app/enviroments/enviroment';
 import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/service/order.service';
 import { OrderResponse } from 'src/app/responses/order.response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-admin',
@@ -77,24 +78,52 @@ export class OrderAdminComponent implements OnInit {
   }
 
   deleteOrder(id: number) {
-    const confirmation = window
-      .confirm('Are you sure you want to delete this order?');
-    if(confirmation) {
-      debugger;
-      this.orderService.deleteOrder(id).subscribe({
-        next: (response: any) => {
-          debugger;
-          // location.reload();
-          this.router.navigate(['/admin/orders'])
-        },
-        complete: () => {
-          debugger;
-        },
-        error: (error: any) => {
-          debugger;
-          console.error("Error fetching detail: ", error);
-        }
-      })
-    }
+    // Hiển thị thông báo xác nhận xóa với SweetAlert2
+    Swal.fire({
+      title: 'Bạn có chắc chắn?',
+      text: 'Đơn hàng sẽ bị xóa và không thể khôi phục!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        debugger;
+  
+        this.orderService.deleteOrder(id).subscribe({
+          next: (response: any) => {
+            debugger;
+  
+            // Hiển thị thông báo xóa thành công
+            Swal.fire({
+              title: 'Xóa thành công!',
+              text: 'Đơn hàng đã được xóa.',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            }).then(() => {
+              // Điều hướng về trang danh sách đơn hàng sau khi xóa thành công
+              this.router.navigate(['/admin/orders']);
+            });
+          },
+          complete: () => {
+            debugger;
+          },
+          error: (error: any) => {
+            debugger;
+  
+            // Hiển thị thông báo lỗi khi xóa thất bại
+            Swal.fire({
+              title: 'Lỗi!',
+              text: `Đã xảy ra lỗi khi xóa đơn hàng: ${error?.error?.message || 'Vui lòng thử lại sau.'}`,
+              icon: 'error',
+              confirmButtonText: 'Thử lại',
+            });
+            console.error('Error deleting order: ', error);
+          },
+        });
+      }
+    });
   }
 }
