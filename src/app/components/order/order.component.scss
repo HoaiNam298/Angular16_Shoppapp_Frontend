@@ -61,3 +61,45 @@ th, td {
     border-radius: 30px;
     width: 200px;
 }
+.product-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.product-quantity .border-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Thêm viền để tạo cảm giác hộp */
+    border-radius: 5px; /* Bo góc */
+    overflow: hidden; /* Đảm bảo bo góc cho nút và input */
+}
+
+.product-quantity button {
+    background-color: #444; /* Màu nền nút */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px; /* Tăng khoảng cách trong nút */
+    transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.product-quantity button:hover {
+    background-color: #666; /* Màu khi hover */
+}
+
+.product-quantity input {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    width: 50px; /* Điều chỉnh kích thước input */
+    padding: 5px 0; /* Tăng khoảng cách dọc */
+}
+
+.product-quantity input:focus {
+    outline: none; /* Loại bỏ đường viền khi focus */
+}

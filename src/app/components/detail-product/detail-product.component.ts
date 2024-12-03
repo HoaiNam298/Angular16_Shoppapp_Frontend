@@ -16,6 +16,7 @@ export class DetailProductComponent implements OnInit{
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
+  isPressedAddToCart: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -110,8 +111,18 @@ export class DetailProductComponent implements OnInit{
     }
   }
 
+  getTotalPrice(): number {
+    if (this.product) {
+      return this.product.price * this.quantity
+    }
+    return 0;
+  }
+
   buyNow(): void{
-    this.router.navigate(['/orders'])
+    if(this.isPressedAddToCart == false) {
+      this.addToCard();
+    }
+    this.router.navigate(['/orders']);
   }
 
 }

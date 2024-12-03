@@ -22,6 +22,7 @@ export class OrderComponent implements OnInit {
   cartItems: { product: Product, quantity: number } [] = [];
   totalAmount: number = 0;
   couponcode: string = '';
+  private cart: Map<number, number> = new Map();
   orderData: OrderDTO = {
     user_id: 0,
     fullname: '',
@@ -158,6 +159,20 @@ export class OrderComponent implements OnInit {
       });
     }
   }
+
+  decreaseQuantity(index: number): void {
+    if(this.cartItems[index].quantity > 1) {
+      this.cartItems[index].quantity--;
+      this.updateCartFromCartItems();
+      this.calculateTotal();
+    }
+  }
+
+  increaseQuantity(index: number): void {
+    this.cartItems[index].quantity++;
+    this.updateCartFromCartItems();
+    this.calculateTotal();
+  }
   
   calculateTotal(): void {
     this.totalAmount = this.cartItems.reduce(
@@ -166,8 +181,25 @@ export class OrderComponent implements OnInit {
     );
   }
   
+  confirmDelete(index: number): void {
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+      this.cartItems.splice(index, 1);
+      this.updateCartFromCartItems();
+      this.calculateTotal();
+      debugger
+    }
+  }
 
   applyCoupon(): void {
 
+  }
+
+  private updateCartFromCartItems(): void {
+    this.cart.clear()
+    this.cartItems.forEach((item) => {
+      this.cart.set(item.product.id, item.quantity); // Đặt id sản phẩm làm key, số lượng làm value
+    });
+    this.cartService.setCart(this.cart);
+    debugger
   }
 }

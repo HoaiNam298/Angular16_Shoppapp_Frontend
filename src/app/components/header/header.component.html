@@ -51,13 +51,16 @@
                         
                             <ng-template #popoverContent>
                                 <div class="popover-list">
-                                    <a class="popover-item" (click)="handleItemClick(0)">
-                                        Tài khoản của tôi
+                                    <a class="popover-item" *ngIf="userResponse.role.name == 'admin'" (click)="handleItemClick(0)">
+                                        Dashboard
                                     </a>
                                     <a class="popover-item" (click)="handleItemClick(1)">
-                                        Đơn mua
+                                        Tài khoản của tôi
                                     </a>
                                     <a class="popover-item" (click)="handleItemClick(2)">
+                                        Đơn mua
+                                    </a>
+                                    <a class="popover-item" (click)="handleItemClick(3)">
                                         Đăng xuất
                                     </a>
                                 </div>

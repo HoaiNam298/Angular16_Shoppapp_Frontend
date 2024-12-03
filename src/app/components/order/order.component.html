@@ -89,31 +89,46 @@
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col" class="text-start">Sản phẩm</th>
+                            <th scope="col" class="text-start">#</th>
+                            <th scope="col">Sản phẩm</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Đơn giá</th>
                             <th scope="col">Tổng giá</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let item of cartItems">
+                        <ng-container *ngFor="let item of cartItems; let i = index">
                             <tr>
                                 <td>
+                                    {{ i+1 }}
+                                </td>
+                                <td>
                                     <div class="product-infor">
-                                        <img [src]="item.product.thumbnail" 
-                                        alt="Product-Image" class="product-image">
+                                        <img [src]="item.product.thumbnail" alt="Product-Image" class="product-image">
                                         <span class="product-name">{{ item.product.name }}</span>
                                     </div>
                                 </td>
-                                <td>{{ item.quantity }}</td>
-                                <td>{{ item.product.price | currency: 'VND': 'symbol':'1.2-2' }}</td>
-                                <td>{{ (item.product.price * item.quantity) | currency: 'VND': 'symbol':'1.2-2' }}</td>
+                                <td>
+                                    <div class="product-quantity">
+                                        <div class="border-wrapper">
+                                            <button (click)="decreaseQuantity(i)">-</button>
+                                            <input type="text" [value]="item.quantity">
+                                            <button (click)="increaseQuantity(i)">+</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ item.product.price | currency: 'USD': 'symbol':'1.2-2' }}</td>
+                                <td>{{ (item.product.price * item.quantity) | currency: 'USD': 'symbol':'1.2-2' }}</td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" (click)="confirmDelete(i)">Xóa</button>
+                                </td>
                             </tr>
                         </ng-container>
                     </tbody>
                 </table>  
                 <div>
-                    <h4 class="header-text text-end">Tổng giá: {{ totalAmount | currency: 'VND': 'symbol':'1.2-2' }}</h4>
+                    <h4 class="header-text text-end">Tổng giá: {{ totalAmount | currency: 'USD': 'symbol':'1.2-2' }}</h4>
                 </div>
                 <div class="mt-3">
                     <h4 class="product-header">Nhập coupon</h4>

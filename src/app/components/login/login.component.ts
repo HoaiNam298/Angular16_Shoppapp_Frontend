@@ -9,6 +9,7 @@ import { RoleService } from 'src/app/service/role.service';
 import { Role } from 'src/app/models/role';
 import { UserResponse } from 'src/app/responses/user/user.response';
 import Swal from 'sweetalert2';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService, 
     private router: Router,
     private tokenService: TokenService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private cartService: CartService
     ) {
   }
 
@@ -100,6 +102,7 @@ export class LoginComponent implements OnInit {
               
             },
             complete: () => {
+              this.cartService.refreshCart();
               debugger;
             },
             error: (error: any) => {

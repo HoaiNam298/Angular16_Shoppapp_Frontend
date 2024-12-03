@@ -35,8 +35,10 @@ export class HeaderComponent implements OnInit {
 
   handleItemClick(index: number): void{
     if(index === 0) {
+      this.router.navigate(['/admin']);
+    }else if(index === 1) {
       this.router.navigate(['/profile']);
-    }else if (index === 2) {
+    }else if (index === 3) {
       this.userService.removeUserFromLocalStorage();
       this.tokenService.removeToken();
       this.userResponse = this.userService.getUserResponseFromLocalStorage();
