@@ -12,17 +12,10 @@ export class CartService {
   constructor(private productService: ProductService) { 
     //Lấy dữ liệu giỏ hành từ localStorage khi khởi tạo service
 
-    const storedCard = localStorage.getItem(this.getCartKey());
+    const storedCard = localStorage.getItem('cart');
     if(storedCard) {
         this.cart = new Map(JSON.parse(storedCard));
     }
-  }
-
-  getCartKey(): string {
-    const userResponseJSON = localStorage.getItem('user');
-    const userResponse = JSON.parse(userResponseJSON!);
-    debugger;
-    return `cart: ${userResponse.id}`;
   }
 
   addToCard(productId: number, quantity: number): void {
@@ -35,8 +28,16 @@ export class CartService {
         this.cart.set(productId, quantity);
     }
 
+    localStorage.setItem('cart', JSON.stringify(Array.from(this.cart.entries())));
     //Sau khi thay đổi giỏ hàng, lưu trữ nó vào localStorage
     this.saveCartToLocalStorage();
+  }
+
+  getCartKey(): string {
+    const userResponseJSON = localStorage.getItem('user');
+    const userResponse = JSON.parse(userResponseJSON!);
+    debugger;
+    return `cart: ${userResponse.id}`;
   }
 
   getCart(): Map<number, number> {
